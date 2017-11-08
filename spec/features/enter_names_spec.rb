@@ -22,3 +22,4 @@ describe 'Battle', :type => :feature do
     expect(page).to have_content "100HP ____ 90HP"
   end
 end
+

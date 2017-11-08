@@ -7,7 +7,11 @@ class Player
     @hp = 100
   end
 
-  def attacked
+  def attack(opponent)
+    opponent.deduct_hp
+  end
+
+  def deduct_hp
     @hp -= 10
   end
 

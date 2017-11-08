@@ -1,33 +1,35 @@
 require 'sinatra/base'
 require './lib/player'
+require './lib/game'
+
 
 class Battle < Sinatra::Base
-
+  
   enable :sessions
   set :session_secret, 'key'
 
   get '/' do
+    session[:attack_confirmation] = nil
     erb(:index)
   end
 
   get '/play' do
-    @player1 = $player1.name
-    @player2 = $player2.name
-    @player1hp = $player1.hp
-    @player2hp = $player2.hp
+    @game = $game
     @attack_confirmation = session[:attack_confirmation]
     erb(:play)
   end
 
   post '/names' do
-    $player1 = Player.new(params[:player1])
-    $player2 = Player.new(params[:player2])
+    player1 = Player.new(params[:player1])
+    player2 = Player.new(params[:player2])
+    $game = Game.new(player1, player2)
     redirect '/play'
   end
 
   post '/attack' do
-    $player2.attacked
-    session[:attack_confirmation] = "You've attacked #{$player2.name}!"
+    @game = $game
+    @game.attack(@game.player2)
+    session[:attack_confirmation] = "You've attacked #{@game.player2.name}!"
     redirect '/play'
   end
 
