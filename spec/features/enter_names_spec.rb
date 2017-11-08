@@ -33,4 +33,16 @@ describe 'Battle', :type => :feature do
     2.times { click_button('attack') }
     expect(page).to have_content "90HP ____ 90HP"
   end
+
+  it 'Shows that a player losees when reach to 0HP' do
+    sign_in_and_play
+    19.times { click_button('attack') }
+    expect(page).to have_content "Dania you've lost!"
+  end
+
+  # it 'Shows that a player losees when reach to 0HP' do
+  #   sign_in_and_play
+  #   20.times { click_button('attack') }
+  #   expect(page).to have_content "Allan you've lost!"
+  # end
 end

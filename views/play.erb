@@ -6,3 +6,9 @@
 <% if @attack_confirmation %>
 	<%=@attack_confirmation%>
 <% end %>
+
+<% if @game.player2.hp == 0 %>
+	<%= @game.player2.name %> you've lost!
+<!-- # <% elsif @game.player1.hp == 0 %>
+ 	<%= @game.player1.name %> you've lost! -->
+<% end %>
