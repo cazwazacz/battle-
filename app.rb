@@ -4,7 +4,7 @@ require './lib/game'
 
 
 class Battle < Sinatra::Base
-  
+
   enable :sessions
   set :session_secret, 'key'
 
@@ -28,8 +28,8 @@ class Battle < Sinatra::Base
 
   post '/attack' do
     @game = $game
-    @game.attack(@game.player2)
-    session[:attack_confirmation] = "You've attacked #{@game.player2.name}!"
+    @game.attack
+    session[:attack_confirmation] = "You've attacked #{@game.attacked_player}!"
     redirect '/play'
   end
 
